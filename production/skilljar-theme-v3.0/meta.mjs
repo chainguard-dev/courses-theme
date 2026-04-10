@@ -1,0 +1,159 @@
+import { logger } from "./logger.mjs";
+
+export function Q(selector, root = document) {
+  return root.querySelector(selector);
+}
+
+export function A(selector, root = document) {
+  return root.querySelectorAll(selector);
+}
+
+export function c(selector) {
+  return Q(selector) || false;
+}
+
+export function sanitizeUrl(link, UTM = {}) {
+  let url;
+  try {
+    url = new URL(link);
+  } catch {
+    logger.warn("sanitizeUrl: Invalid URL provided, returning as-is:", link);
+    return link; // relative URL or unparseable — return as-is
+  }
+
+  // Only add UTM params to Chainguard URLs
+  if (!url.hostname.endsWith("chainguard.dev")) return link;
+
+  logger.info("sanitizeUrl: Adding UTM parameters to URL:", link);
+  Object.entries(UTM).forEach(([key, value]) => {
+    url.searchParams.set(key, value);
+  });
+
+  return url.toString();
+}
+
+/**
+ * Creates a DOM element with specified tag, properties, and children.
+ * Supports event listeners by using "onEventName" properties (e.g., "onclick").
+ * Supports both HTML and SVG elements.
+ * @param {string} tag - The HTML/SVG tag name.
+ * @param {Object} props - An object containing properties and attributes for the element.
+ * @param {Array} children - An array of child nodes to append to the element.
+ * @returns {HTMLElement|SVGElement|null} - The created DOM element or null if no tag is provided.
+ *
+ * @example
+ * const button = el('button', { className: 'btn', onclick: () => alert('Clicked!') }, [
+ *  el('span', { textContent: 'Click Me' })
+ * ]);
+ * document.body.appendChild(button);
+ */
+export function el(tag, props = {}, children = []) {
+  if (!tag) return null;
+  const svgTags =
+    tag === "svg" ||
+    tag === "path" ||
+    tag === "g" ||
+    tag === "defs" ||
+    tag === "clipPath";
+
+  let n;
+  if (svgTags) {
+    n = document.createElementNS("http://www.w3.org/2000/svg", tag);
+  } else {
+    n = document.createElement(tag);
+  }
+  for (const [k, v] of Object.entries(props)) {
+    if (!v) continue;
+
+    if (/^on[A-Za-z]+$/.test(k) && typeof v === "function") {
+      const eventName = k.slice(2).toLowerCase(); // "onclick" -> "click"
+      n.addEventListener(eventName, v);
+      continue;
+    }
+
+    if (k === "className" && !svgTags) n.className = v;
+    else if (k === "className" && svgTags) n.className.baseVal = v;
+    else if (k === "textContent" || k === "text") n.textContent = v;
+    else if (k === "innerHTML") n.innerHTML = v;
+    else n.setAttribute(k, v);
+  }
+  (Array.isArray(children) ? children : [children])
+    .filter(Boolean)
+    .forEach((child) => n.appendChild(child));
+  return n;
+}
+
+/**
+ * Sets the text content of an HTML element.
+ * @param {HTMLElement} element - The target HTML element.
+ * @param {string} value - The text content to set.
+ * @param {string} [auto=""] - The fallback text content if value is undefined or null.
+ * @returns {void}
+ */
+export function text(element, value, auto = "") {
+  if (element && value !== undefined && value !== null) {
+    element.textContent = value;
+  } else if (element) {
+    element.textContent = auto;
+  } else {
+    logger.warn("text: Element is null or undefined. Value:", value);
+  }
+}
+
+/**
+ * Sets the placeholder attribute of an HTML element.
+ * @param {HTMLElement} element - The target HTML element.
+ * @param {string} value - The placeholder text to set.
+ * @returns {void}
+ */
+export function placeholder(element, value) {
+  if (element && value !== undefined && value !== null) {
+    element.setAttribute("placeholder", value);
+  } else {
+    logger.warn("placeholder: Element is null or undefined. Value:", value);
+  }
+}
+
+/**
+ * Removes elements from the DOM based on the provided selector(s).
+ * @param {string|string[]} selector - A CSS selector string or an array of selector strings.
+ * @returns {void}
+ * @example
+ * // Remove a single element
+ * remove('.ad-banner');
+ *
+ * // Remove multiple elements
+ * remove(['.ad-banner', '#popup', '.sponsored-content']);
+ */
+export function remove(selector) {
+  if (!selector) return;
+
+  if (selector instanceof HTMLElement) {
+    try {
+      selector.remove();
+    } catch (e) {
+      logger.warn("Could not remove element:", selector, e);
+    }
+    return;
+  }
+
+  if (Array.isArray(selector)) {
+    selector.forEach((sel) => remove(sel));
+    return;
+  }
+
+  A(selector).forEach((el) => {
+    try {
+      el.remove();
+    } catch (e) {
+      logger.warn("Could not remove element:", el, e);
+    }
+  });
+}
+
+export function toTitleCase(str) {
+  return str.replace(
+    /\w\S*/g,
+    (text) => text.charAt(0).toUpperCase() + text.substring(1).toLowerCase(),
+  );
+}
