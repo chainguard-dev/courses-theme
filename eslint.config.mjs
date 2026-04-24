@@ -9,9 +9,9 @@ export default defineConfig([
   { files: ["**/*.{js,mjs,cjs}"], languageOptions: { globals: globals.browser } },
   { files: ["**/*.{js,mjs,cjs}"], plugins: { js }, extends: ["js/recommended"] },
 
-  // Node.js config files need Node globals (module, require, process, …)
+  // Node.js config and generator scripts need Node globals (module, require, process, …)
   {
-    files: ["*.config.js", "*.config.mjs", "*.config.cjs"],
+    files: ["*.config.js", "*.config.mjs", "*.config.cjs", "generate_*.js"],
     languageOptions: { globals: globals.node },
   },
 
