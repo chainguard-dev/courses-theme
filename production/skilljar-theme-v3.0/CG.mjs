@@ -21,7 +21,7 @@ export const CG = {
     hasCourse: typeof skilljarCourse !== "undefined",
     hasCatalogPage: typeof skilljarCatalogPage !== "undefined",
     hasCourseProgress: typeof skilljarCourseProgress !== "undefined",
-    hasCourseBoxes: A(".coursebox-container").length > 0,
+    get hasCourseBoxes() { return A(".coursebox-container").length > 0; },
 
     get isAdmin() {
       if (!this.isLoggedIn) return false;
@@ -57,16 +57,16 @@ export const CG = {
     },
   },
   page: {
-    isLogin: c(".sj-page-login"),
-    isSignup: c(".sj-page-signup"),
-    is404: c(".sj-page-error-404"),
-    isCatalog: c(".sj-page-catalog"),
-    isLanding: c(".sj-page-catalog-root"),
-    isCourseUnregistered: c(".sj-page-detail-course"),
-    isCourseRegistered: c(".sj-page-curriculum"),
-    isPathUnregistered: c(".sj-page-detail-path"), // Removed: .sj-page-detail-bundle
-    isPathRegistered: c(".sj-page-path"), // Removed: .sj-page-series
-    isLesson: c(".sj-page-lesson"),
+    get isLogin() { return c(".sj-page-login"); },
+    get isSignup() { return c(".sj-page-signup"); },
+    get is404() { return c(".sj-page-error-404"); },
+    get isCatalog() { return c(".sj-page-catalog"); },
+    get isLanding() { return c(".sj-page-catalog-root"); },
+    get isCourseUnregistered() { return c(".sj-page-detail-course"); },
+    get isCourseRegistered() { return c(".sj-page-curriculum"); },
+    get isPathUnregistered() { return c(".sj-page-detail-path"); }, // Removed: .sj-page-detail-bundle
+    get isPathRegistered() { return c(".sj-page-path"); }, // Removed: .sj-page-series
+    get isLesson() { return c(".sj-page-lesson"); },
     isPartner404:
       [
         "/page/partners",
