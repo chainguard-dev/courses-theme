@@ -7,11 +7,7 @@ import { setStyle } from "./styling.mjs";
 import { CG } from "./CG.mjs";
 import { logger } from "./logger.mjs";
 
-// External libraries — Function() bypasses esbuild's static import() → require()
-// transform in IIFE mode, letting the browser's native dynamic import handle the
-// CDN URL. Requires unsafe-eval in CSP.
-const confettiLoader = Function('u', 'return import(u)')("https://cdn.jsdelivr.net/npm/@tsparticles/confetti@3.0.3/+esm")
-  .then(m => m.confetti);
+import { confetti } from "@tsparticles/confetti";
 
 // static imports
 import { config } from "../data/config.mjs";
@@ -131,8 +127,7 @@ export function hideCompletion(elem) {
  * Shoot confetti bursts with stars, circles, and logos.
  * @returns {void}
  */
-export async function shoot(size = "big", { x, y } = { x: 0.5, y: 0.33 }) {
-  const confetti = await confettiLoader;
+export function shoot(size = "big", { x, y } = { x: 0.5, y: 0.33 }) {
   const configConfetti = { ...config.confetti.defaults, origin: { x, y } };
   logger.info("Shooting confetti", configConfetti);
 
