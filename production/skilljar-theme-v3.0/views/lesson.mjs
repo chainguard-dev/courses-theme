@@ -11,8 +11,9 @@ import {
   cleanCommandPrompt,
 } from "../code-utils.mjs";
 
-// Shiki syntax highlighting
-import * as shiki from "https://esm.sh/shiki@3.0.0";
+// Shiki syntax highlighting — lazy dynamic import so esbuild doesn't wrap this
+// CDN URL in a require() shim. The promise is cached after the first call.
+let shikiLoader = null;
 
 // static imports
 import { config } from "../../data/config.mjs";
@@ -133,6 +134,8 @@ function addCopyButton(pre, codeEl) {
  * @returns {Promise<void>} A promise that resolves when formatting is complete.
  */
 const formatCode = async (code, lang) => {
+  if (!shikiLoader) shikiLoader = import("https://esm.sh/shiki@3.0.0");
+  const shiki = await shikiLoader;
   const parser = new DOMParser();
 
   // Apply Shiki highlighting
