@@ -7,10 +7,10 @@ import { setStyle } from "./styling.mjs";
 import { CG } from "./CG.mjs";
 import { logger } from "./logger.mjs";
 
-// External libraries — dynamic import so esbuild doesn't wrap this CDN URL in a
-// require() shim (which throws in browsers). The promise resolves eagerly so
-// shoot() pays no latency penalty on first call.
-const confettiLoader = import("https://cdn.jsdelivr.net/npm/@tsparticles/confetti@3.0.3/+esm")
+// External libraries — Function() bypasses esbuild's static import() → require()
+// transform in IIFE mode, letting the browser's native dynamic import handle the
+// CDN URL. Requires unsafe-eval in CSP.
+const confettiLoader = Function('u', 'return import(u)')("https://cdn.jsdelivr.net/npm/@tsparticles/confetti@3.0.3/+esm")
   .then(m => m.confetti);
 
 // static imports

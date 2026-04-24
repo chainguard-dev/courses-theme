@@ -134,7 +134,7 @@ function addCopyButton(pre, codeEl) {
  * @returns {Promise<void>} A promise that resolves when formatting is complete.
  */
 const formatCode = async (code, lang) => {
-  if (!shikiLoader) shikiLoader = import("https://esm.sh/shiki@3.0.0");
+  if (!shikiLoader) shikiLoader = Function('u', 'return import(u)')("https://esm.sh/shiki@3.0.0");
   const shiki = await shikiLoader;
   const parser = new DOMParser();
 
