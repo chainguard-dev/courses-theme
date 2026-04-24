@@ -490,6 +490,17 @@ export function lessonView() {
     elem.href = sanitizeUrl(elem.href);
   });
 
+  // Mirrors open/closed state on both body and #lp-left-nav so our CSS
+  // (body.cbp-spmenu-open) and Skilljar's CSS (#lp-left-nav.cbp-spmenu-open)
+  // both agree. Also persists the preference to localStorage so the state
+  // survives page loads in browsers where Skilljar's own JS doesn't run (Safari).
+  function setNavOpen(open) {
+    document.body.classList.toggle("cbp-spmenu-open", open);
+    if (CG.dom.local.nav.menu)
+      CG.dom.local.nav.menu.classList.toggle("cbp-spmenu-open", open);
+    try { localStorage.setItem("lessonNavStateOpen", open ? "true" : "false"); } catch { /* storage unavailable */ }
+  }
+
   // Build the nav toggle bar: use Skilljar's if present, otherwise create our own
   if (!CG.dom.local.nav.toggleWrapper) {
     const navBar = el("a", {
@@ -498,7 +509,7 @@ export function lessonView() {
       on: {
         click: (e) => {
           e.preventDefault();
-          document.body.classList.toggle("cbp-spmenu-open");
+          setNavOpen(!document.body.classList.contains("cbp-spmenu-open"));
         }
       }
     }, [
@@ -508,10 +519,12 @@ export function lessonView() {
     CG.dom.local.nav.toggleWrapper = navBar;
   }
 
-  // Open the sidebar by default on desktop
-  if (window.matchMedia("(min-width: 992px)").matches) {
-    document.body.classList.add("cbp-spmenu-open");
-  }
+  // Restore nav state: respect stored preference; default to open on desktop
+  const storedNavState = localStorage.getItem("lessonNavStateOpen");
+  const navShouldOpen = storedNavState !== null
+    ? storedNavState === "true"
+    : window.matchMedia("(min-width: 992px)").matches;
+  setNavOpen(navShouldOpen);
 
   // Close the nav when tapping the backdrop on mobile
   CG.dom.local.body.mainContainer.addEventListener("click", (e) => {
@@ -519,7 +532,7 @@ export function lessonView() {
       document.body.classList.contains("cbp-spmenu-open") &&
       !CG.dom.local.nav.menu.contains(e.target) &&
       !CG.dom.local.nav.toggleWrapper.contains(e.target)) {
-      document.body.classList.remove("cbp-spmenu-open");
+      setNavOpen(false);
     }
   });
 
