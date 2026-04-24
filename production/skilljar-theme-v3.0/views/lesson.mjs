@@ -11,7 +11,42 @@ import {
   cleanCommandPrompt,
 } from "../code-utils.mjs";
 
-import * as shiki from "shiki";
+// Fine-grained shiki imports — only the languages from production/data/languages.json
+// and the theme set in config.mjs. Add langs here if languages.json changes.
+import { createHighlighterCore } from "shiki/core";
+import { createJavaScriptRegexEngine } from "shiki/engine/javascript";
+import langBash from "shiki/langs/bash.mjs";
+import langConsole from "shiki/langs/console.mjs";
+import langDocker from "shiki/langs/docker.mjs";
+import langDockerfile from "shiki/langs/dockerfile.mjs";
+import langGo from "shiki/langs/go.mjs";
+import langHtml from "shiki/langs/html.mjs";
+import langHttp from "shiki/langs/http.mjs";
+import langJson from "shiki/langs/json.mjs";
+import langMarkdown from "shiki/langs/markdown.mjs";
+import langNginx from "shiki/langs/nginx.mjs";
+import langPython from "shiki/langs/python.mjs";
+import langTerraform from "shiki/langs/terraform.mjs";
+import langYaml from "shiki/langs/yaml.mjs";
+import themeMinLight from "shiki/themes/min-light.mjs";
+
+// "markup" is a Prism.js alias for HTML; "ansi" and "text" have no shiki equivalent
+// (formatCode returns early for unsupported langs, leaving the code block as-is)
+const LANG_ALIASES = { markup: "html" };
+const SUPPORTED_LANGS = new Set([
+  "bash", "console", "docker", "dockerfile", "go", "html",
+  "http", "json", "markdown", "nginx", "python", "terraform", "yaml",
+]);
+
+const highlighterPromise = createHighlighterCore({
+  themes: [themeMinLight],
+  langs: [
+    langBash, langConsole, langDocker, langDockerfile, langGo, langHtml,
+    langHttp, langJson, langMarkdown, langNginx, langPython, langTerraform,
+    langYaml,
+  ],
+  engine: createJavaScriptRegexEngine(),
+});
 
 // static imports
 import { config } from "../../data/config.mjs";
@@ -132,15 +167,17 @@ function addCopyButton(pre, codeEl) {
  * @returns {Promise<void>} A promise that resolves when formatting is complete.
  */
 const formatCode = async (code, lang) => {
+  const normalizedLang = LANG_ALIASES[lang] ?? lang;
+  if (!SUPPORTED_LANGS.has(normalizedLang)) return;
+
+  const highlighter = await highlighterPromise;
   const parser = new DOMParser();
 
-  // Apply Shiki highlighting
-  const formatted = await shiki.codeToHtml(
-    // trim textContent to avoid extra newlines
+  const formatted = highlighter.codeToHtml(
     code.textContent.trim(),
     {
-      lang,
-      theme: config.codeTheme || "github-light",
+      lang: normalizedLang,
+      theme: config.codeTheme || "min-light",
       transformers: [addLineNumberSpans()],
     },
   );
@@ -148,8 +185,7 @@ const formatCode = async (code, lang) => {
   let newCode = Q("code", parser.parseFromString(formatted, "text/html"));
 
   if (newCode) {
-    // replace old code element with new highlighted one
-    newCode.classList = code.classList; // preserve original classes
+    newCode.classList = code.classList;
     code.replaceWith(newCode);
   }
 };
