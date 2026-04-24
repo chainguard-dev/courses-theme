@@ -320,7 +320,7 @@ export const CG = {
   },
   dom: {
     local: {},
-    body: document.body,
+    get body() { return document.body; },
     get bodyHeader() { return Q("#header"); },
     get headerLeft() { return Q("#header-left"); },
     get headerRight() { return Q("#header-right"); },
