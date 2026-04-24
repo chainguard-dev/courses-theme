@@ -13,7 +13,7 @@
     "watch:js": "esbuild production/theme.mjs --bundle --sourcemap --outfile=dist/bundle.js --watch",
     "generate:langs": "node generate_language_file.js",
     "build": "npm run lint && npm run build:css && npm run build:js",
-    "build:dev": "npm run lint && npm run build:css:dev && npm run build:js:dev",
+    "build:dev": "node build-dev.mjs",
     "dev": "npm run watch:css & npm run watch:js",
     "test": "node --test"
   },
