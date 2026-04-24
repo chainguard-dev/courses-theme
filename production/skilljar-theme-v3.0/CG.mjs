@@ -321,26 +321,25 @@ export const CG = {
   dom: {
     local: {},
     body: document.body,
-    bodyHeader: Q("#header"),
-    headerLeft: Q("#header-left"),
-    headerRight: Q("#header-right"),
-    courseBoxes: A(".coursebox-container"),
+    get bodyHeader() { return Q("#header"); },
+    get headerLeft() { return Q("#header-left"); },
+    get headerRight() { return Q("#header-right"); },
+    get courseBoxes() { return A(".coursebox-container"); },
 
     get contentContainer() {
       return CG.page.isLesson ? Q(".sj-page-lesson") : Q("#skilljar-content");
     },
 
     header: {
-      wrapper: Q(".cp-summary-wrapper") || Q(".dp-summary-wrapper"),
-      courseInfo: Q(".sj-course-info-wrapper") || Q(".sj-heading-paragraph"),
-      ctaBtnWrapper: Q("#resume-button") || Q("#purchase-button-wrapper-large"),
-      registerBtn: Q("#purchase-button-wrapper-large a"),
-      ctaBtn: Q("#resume-button a"),
-      ctaBtnText: Q("#resume-button a span"),
-      btn:
-        Q("a.resume-button") ||
-        Q("a.purchase-button") ||
-        Q("a#path-curriculum-resume-button"),
+      get wrapper() { return Q(".cp-summary-wrapper") || Q(".dp-summary-wrapper"); },
+      get courseInfo() { return Q(".sj-course-info-wrapper") || Q(".sj-heading-paragraph"); },
+      get ctaBtnWrapper() { return Q("#resume-button") || Q("#purchase-button-wrapper-large"); },
+      get registerBtn() { return Q("#purchase-button-wrapper-large a"); },
+      get ctaBtn() { return Q("#resume-button a"); },
+      get ctaBtnText() { return Q("#resume-button a span"); },
+      get btn() {
+        return Q("a.resume-button") || Q("a.purchase-button") || Q("a#path-curriculum-resume-button");
+      },
 
       get links() {
         if (!this.courseInfo) return [];
@@ -371,8 +370,8 @@ export const CG = {
         return "#";
       },
     },
-    courseContainer: Q("#dp-details") || Q("#cp-content"),
-    curriculumContainer: A("ul.dp-curriculum")[0] || Q("div#curriculum-list"),
+    get courseContainer() { return Q("#dp-details") || Q("#cp-content"); },
+    get curriculumContainer() { return A("ul.dp-curriculum")[0] || Q("div#curriculum-list"); },
   },
 
   data: {
