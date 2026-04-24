@@ -49,7 +49,21 @@ export function route() {
     logger.info(`Running page styling handler: ${match.handler.name}`);
     match.handler();
   } else {
-    logger.warn("No page styling handler matched for this page.");
+    logger.error("No page styling handler matched for this page.", {
+      url: window.location.href,
+      page: {
+        isLesson: CG.page.isLesson,
+        isCourseRegistered: CG.page.isCourseRegistered,
+        isCourseUnregistered: CG.page.isCourseUnregistered,
+        isPathRegistered: CG.page.isPathRegistered,
+        isPathUnregistered: CG.page.isPathUnregistered,
+        isCatalog: CG.page.isCatalog,
+        isLanding: CG.page.isLanding,
+        isLogin: CG.page.isLogin,
+        isSignup: CG.page.isSignup,
+        is404: CG.page.is404,
+      },
+    });
   }
 }
 

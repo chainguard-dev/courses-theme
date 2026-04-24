@@ -22,15 +22,24 @@ import { logger } from "./skilljar-theme-v3.0/logger.mjs";
 document.addEventListener("DOMContentLoaded", () => {
   try {
     if (CG.env.isAdmin) setupDebug();
-
     preRoute();
+  } catch (err) {
+    logger.error("Theme setup failed in preRoute().", err);
+  }
+
+  try {
     route();
+  } catch (err) {
+    logger.error("Theme setup failed in route().", err);
+  }
+
+  try {
     postRoute();
   } catch (err) {
-    logger.error("Theme setup failed — page will render unstyled.", err);
-  } finally {
-    // Always show the body; preload.js hides it to prevent FOUC and we must
-    // re-show it regardless of whether the theme applied successfully.
-    showBody();
+    logger.error("Theme setup failed in postRoute().", err);
   }
+
+  // Always show the body; preload.js hides it to prevent FOUC and we must
+  // re-show it regardless of whether the theme applied successfully.
+  showBody();
 });
