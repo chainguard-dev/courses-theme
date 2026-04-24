@@ -142,7 +142,7 @@ body.sj-page-lesson {
   #lp-left-nav {
     position: fixed; /* fixed so it stays at the viewport edge and doesn't scroll away */
     top: 60px !important; /* Skilljar Override: cbp-spmenu sets top: 0, we need below fixed header */
-    left: 0;
+    left: 0 !important; /* Skilljar Override: cbp-spmenu sets left: -320px which breaks transform-based animation in Safari */
     display: flex !important; /* Skilljar Override: cbp-spmenu sets display: block */
     flex-direction: column !important; /* Skilljar Override: pin badge to bottom of nav */
     width: 292px; /* formerly 320px; */
