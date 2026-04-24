@@ -459,7 +459,7 @@ export function lessonView() {
       body: Q("#lesson-body"),
       innerBody: Q("#lesson-main-inner"),
       content: {
-        codeBlocks: A("pre:has(code):not(.language-ansi)"),
+        codeBlocks: A("pre:not(.language-ansi)").filter(el => el.querySelector("code")),
         inlineCodeBlocks: A("code[data-lang]"),
         internalCourseWarning: Q("#internal-course-warning"),
         links: A("sjwc-lesson-content-item a"),
@@ -493,13 +493,12 @@ export function lessonView() {
   // Build the nav toggle bar: use Skilljar's if present, otherwise create our own
   if (!CG.dom.local.nav.toggleWrapper) {
     const navBar = el("a", {
-      id: "left-nav-button", href: "#", aria: {
-        label: "Toggle course navigation",
-        on: {
-          click: (e) => {
-            e.preventDefault();
-            document.body.classList.toggle("cbp-spmenu-open");
-          }
+      id: "left-nav-button", href: "#",
+      aria: { label: "Toggle course navigation" },
+      on: {
+        click: (e) => {
+          e.preventDefault();
+          document.body.classList.toggle("cbp-spmenu-open");
         }
       }
     }, [
