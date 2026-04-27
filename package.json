@@ -11,8 +11,9 @@
     "build:js:dev": "esbuild production/theme.mjs --bundle --sourcemap --outfile=dist/bundle.js",
     "watch:css": "postcss production/style.css -o dist/bundle.css --watch --map",
     "watch:js": "esbuild production/theme.mjs --bundle --sourcemap --outfile=dist/bundle.js --watch",
+    "generate:langs": "node generate_language_file.js",
     "build": "npm run lint && npm run build:css && npm run build:js",
-    "build:dev": "npm run lint && npm run build:css:dev && npm run build:js:dev",
+    "build:dev": "node build-dev.mjs",
     "dev": "npm run watch:css & npm run watch:js",
     "test": "node --test"
   },
@@ -32,6 +33,8 @@
     "stylelint-order": "^7.0.1"
   },
   "dependencies": {
+    "@tsparticles/confetti": "^3.9.1",
+    "shiki": "^4.0.2",
     "terser": "^5.44.1"
   }
 }

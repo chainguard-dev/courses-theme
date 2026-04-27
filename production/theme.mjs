@@ -17,14 +17,29 @@ import { CG } from "./skilljar-theme-v3.0/CG.mjs";
 import { showBody } from "./skilljar-theme-v3.0/styling.mjs";
 import { route, preRoute, postRoute } from "./skilljar-theme-v3.0/router.mjs";
 import { setupDebug } from "./skilljar-theme-v3.0/debug.mjs";
+import { logger } from "./skilljar-theme-v3.0/logger.mjs";
 
 document.addEventListener("DOMContentLoaded", () => {
-  if (CG.env.isAdmin) setupDebug();
+  try {
+    if (CG.env.isAdmin) setupDebug();
+    preRoute();
+  } catch (err) {
+    logger.error("Theme setup failed in preRoute().", err);
+  }
 
-  preRoute();
-  route();
-  postRoute();
+  try {
+    route();
+  } catch (err) {
+    logger.error("Theme setup failed in route().", err);
+  }
 
-  // show all
+  try {
+    postRoute();
+  } catch (err) {
+    logger.error("Theme setup failed in postRoute().", err);
+  }
+
+  // Always show the body; preload.js hides it to prevent FOUC and we must
+  // re-show it regardless of whether the theme applied successfully.
   showBody();
 });

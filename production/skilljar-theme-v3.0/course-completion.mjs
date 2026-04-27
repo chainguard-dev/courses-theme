@@ -7,8 +7,7 @@ import { setStyle } from "./styling.mjs";
 import { CG } from "./CG.mjs";
 import { logger } from "./logger.mjs";
 
-// External libraries
-import { confetti } from "https://cdn.jsdelivr.net/npm/@tsparticles/confetti@3.0.3/+esm";
+import { confetti } from "@tsparticles/confetti";
 
 // static imports
 import { config } from "../data/config.mjs";

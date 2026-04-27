@@ -21,7 +21,7 @@ export const CG = {
     hasCourse: typeof skilljarCourse !== "undefined",
     hasCatalogPage: typeof skilljarCatalogPage !== "undefined",
     hasCourseProgress: typeof skilljarCourseProgress !== "undefined",
-    hasCourseBoxes: A(".coursebox-container").length > 0,
+    get hasCourseBoxes() { return A(".coursebox-container").length > 0; },
 
     get isAdmin() {
       if (!this.isLoggedIn) return false;
@@ -57,16 +57,16 @@ export const CG = {
     },
   },
   page: {
-    isLogin: c(".sj-page-login"),
-    isSignup: c(".sj-page-signup"),
-    is404: c(".sj-page-error-404"),
-    isCatalog: c(".sj-page-catalog"),
-    isLanding: c(".sj-page-catalog-root"),
-    isCourseUnregistered: c(".sj-page-detail-course"),
-    isCourseRegistered: c(".sj-page-curriculum"),
-    isPathUnregistered: c(".sj-page-detail-path"), // Removed: .sj-page-detail-bundle
-    isPathRegistered: c(".sj-page-path"), // Removed: .sj-page-series
-    isLesson: c(".sj-page-lesson"),
+    get isLogin() { return c(".sj-page-login"); },
+    get isSignup() { return c(".sj-page-signup"); },
+    get is404() { return c(".sj-page-error-404"); },
+    get isCatalog() { return c(".sj-page-catalog"); },
+    get isLanding() { return c(".sj-page-catalog-root"); },
+    get isCourseUnregistered() { return c(".sj-page-detail-course"); },
+    get isCourseRegistered() { return c(".sj-page-curriculum"); },
+    get isPathUnregistered() { return c(".sj-page-detail-path"); }, // Removed: .sj-page-detail-bundle
+    get isPathRegistered() { return c(".sj-page-path"); }, // Removed: .sj-page-series
+    get isLesson() { return c(".sj-page-lesson"); },
     isPartner404:
       [
         "/page/partners",
@@ -320,27 +320,26 @@ export const CG = {
   },
   dom: {
     local: {},
-    body: document.body,
-    bodyHeader: Q("#header"),
-    headerLeft: Q("#header-left"),
-    headerRight: Q("#header-right"),
-    courseBoxes: A(".coursebox-container"),
+    get body() { return document.body; },
+    get bodyHeader() { return Q("#header"); },
+    get headerLeft() { return Q("#header-left"); },
+    get headerRight() { return Q("#header-right"); },
+    get courseBoxes() { return A(".coursebox-container"); },
 
     get contentContainer() {
       return CG.page.isLesson ? Q(".sj-page-lesson") : Q("#skilljar-content");
     },
 
     header: {
-      wrapper: Q(".cp-summary-wrapper") || Q(".dp-summary-wrapper"),
-      courseInfo: Q(".sj-course-info-wrapper") || Q(".sj-heading-paragraph"),
-      ctaBtnWrapper: Q("#resume-button") || Q("#purchase-button-wrapper-large"),
-      registerBtn: Q("#purchase-button-wrapper-large a"),
-      ctaBtn: Q("#resume-button a"),
-      ctaBtnText: Q("#resume-button a span"),
-      btn:
-        Q("a.resume-button") ||
-        Q("a.purchase-button") ||
-        Q("a#path-curriculum-resume-button"),
+      get wrapper() { return Q(".cp-summary-wrapper") || Q(".dp-summary-wrapper"); },
+      get courseInfo() { return Q(".sj-course-info-wrapper") || Q(".sj-heading-paragraph"); },
+      get ctaBtnWrapper() { return Q("#resume-button") || Q("#purchase-button-wrapper-large"); },
+      get registerBtn() { return Q("#purchase-button-wrapper-large a"); },
+      get ctaBtn() { return Q("#resume-button a"); },
+      get ctaBtnText() { return Q("#resume-button a span"); },
+      get btn() {
+        return Q("a.resume-button") || Q("a.purchase-button") || Q("a#path-curriculum-resume-button");
+      },
 
       get links() {
         if (!this.courseInfo) return [];
@@ -371,8 +370,8 @@ export const CG = {
         return "#";
       },
     },
-    courseContainer: Q("#dp-details") || Q("#cp-content"),
-    curriculumContainer: A("ul.dp-curriculum")[0] || Q("div#curriculum-list"),
+    get courseContainer() { return Q("#dp-details") || Q("#cp-content"); },
+    get curriculumContainer() { return A("ul.dp-curriculum")[0] || Q("div#curriculum-list"); },
   },
 
   data: {
