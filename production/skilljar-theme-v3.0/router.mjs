@@ -13,6 +13,7 @@ import {
 } from "./views/index.mjs";
 import { generateFooter } from "./footer.mjs";
 import { hide } from "./styling.mjs";
+import { setupCoursesNav } from "./courses-nav.mjs";
 
 /**
  * An array of page handlers that map specific page conditions to their corresponding view functions.
@@ -117,6 +118,11 @@ export function preRoute() {
       left: Q("#mobile-header-left"),
       right: Q("#mobile-header-right"),
     };
+
+    // Two-tier header: brand bar + sticky courses nav
+    if (CG.page.isLanding || CG.page.isCatalog) {
+      setupCoursesNav();
+    }
   } else if (CG.env.isPartner) {
     // add partner menu item
     const partnerItem = el("a", {

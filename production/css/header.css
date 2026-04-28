@@ -201,6 +201,167 @@
   }
 }
 
+/* ─── Courses nav (two-tier header, desktop only) ─────────────────────────── */
+
+#courses-nav {
+  position: fixed;
+  top: 60px;
+  left: 0;
+  z-index: 4; /* below #header (z-index: 5) */
+  display: none; /* shown via media query below */
+  width: 100%;
+  height: 54px;
+  background: var(--white);
+  border-bottom: 1px solid var(--color-border-default);
+  transition: top 0.25s ease;
+
+  #courses-nav-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    max-width: 100%;
+    height: 100%;
+  }
+
+  #courses-nav-left {
+    display: flex;
+    align-items: center;
+    height: 100%;
+  }
+
+  #courses-nav-logo {
+    display: flex;
+    align-items: stretch;
+    height: 100%;
+    background-color: var(--blurple);
+
+    a {
+      display: flex;
+      align-items: center;
+      height: 100%;
+      padding: var(--spacing-0) var(--spacing-4);
+
+      svg {
+        height: 55%;
+        fill: var(--color-surface-base) !important;
+      }
+    }
+  }
+
+  .courses-nav-sep {
+    display: inline-block;
+    width: 1px;
+    height: 20px;
+    margin: var(--spacing-0) var(--spacing-4);
+    background: var(--color-border-default);
+    align-self: center;
+    flex-shrink: 0;
+  }
+
+  .courses-nav-brand {
+    color: var(--ink);
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-bold);
+    text-decoration: none;
+    white-space: nowrap;
+
+    &:hover {
+      color: var(--blurple);
+    }
+  }
+
+  #courses-nav-links {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-1);
+    margin-left: var(--spacing-4);
+
+    a {
+      padding: var(--spacing-1-5) var(--spacing-3);
+      border-radius: var(--radius-lg);
+      color: var(--ink);
+      font-size: var(--font-size-sm);
+      text-decoration: none;
+      opacity: 0.7;
+      transition: opacity 0.15s ease, background-color 0.15s ease;
+
+      &:hover {
+        background-color: var(--color-surface-soft);
+        opacity: 1;
+      }
+    }
+  }
+
+  #courses-nav-right {
+    display: flex;
+    align-items: center;
+    height: 100%;
+
+    /* Compact the Skilljar account-nav login button */
+    .account-nav {
+      display: flex;
+      align-items: center;
+      height: 100%;
+
+      .login-link {
+        display: flex;
+        align-items: center;
+        width: auto;
+        height: auto;
+        padding: var(--spacing-2) var(--spacing-6);
+        margin: var(--spacing-0) var(--spacing-4);
+        border-radius: var(--radius-lg);
+        font-family: Gellix, sans-serif;
+        font-size: var(--font-size-sm);
+        font-weight: var(--font-weight-semibold);
+      }
+
+      .info-circle-wrapper {
+        border-left: none;
+        padding: var(--spacing-0) var(--spacing-5);
+      }
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+}
+
+/* Show courses nav on desktop, slide brand header away on scroll */
+@media screen and (min-width: 691px) {
+  #courses-nav {
+    display: flex;
+    align-items: stretch;
+  }
+
+  /* Brand header slides up when pinned */
+  body.courses-header-pinned #header.headers {
+    transform: translateY(-100%);
+    transition: transform 0.25s ease;
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+  }
+
+  /* Courses nav moves to top: 0 when pinned */
+  body.courses-header-pinned #courses-nav {
+    top: 0;
+    box-shadow: var(--shadow-elevation-sm);
+  }
+
+  /* Extra top padding on catalog/landing pages to clear both bars */
+  body.sj-page-catalog-root,
+  body.sj-page-catalog {
+    .catalog-center-width {
+      padding-top: var(--spacing-15) !important; /* ~60px extra for courses nav */
+    }
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────── */
+
 #mobile-header {
   display: none;
 }
