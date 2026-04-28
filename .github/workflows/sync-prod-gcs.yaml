@@ -6,7 +6,6 @@ on:
       - main
     paths:
       - 'production/**'
-      - 'fonts/**'
   workflow_dispatch:
 
 permissions: {}
@@ -86,9 +85,6 @@ jobs:
 
       - name: Sync production directory to GCS
         run: gsutil -m rsync -r -d production/ gs://chainguard-courses-theme/production/
-
-      - name: Sync fonts directory to GCS
-        run: gsutil -m rsync -r -d fonts/ gs://chainguard-courses-theme/fonts/
 
       - name: Sync dist directory to GCS
         run: gsutil -m rsync -r -d dist/ gs://chainguard-courses-theme/dist/
