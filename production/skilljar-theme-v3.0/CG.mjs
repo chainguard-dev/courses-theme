@@ -2,7 +2,7 @@ import { c, A, Q, el, sanitizeUrl } from "./utils.mjs";
 import { logger } from "./logger.mjs";
 
 // static import
-import { logoLinkyAndChainguard } from "../data/graphics.mjs";
+import { logoLinky } from "../data/graphics.mjs";
 import { config } from "../data/config.mjs";
 
 /**
@@ -313,7 +313,7 @@ export const CG = {
         el("a", {
           className: "header-logo-link focus-link-v2",
           href: CG.state.baseURL,
-          innerHTML: logoLinkyAndChainguard,
+          innerHTML: logoLinky,
         }),
       ]);
     },

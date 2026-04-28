@@ -219,7 +219,7 @@
     display: flex;
     justify-content: space-between;
     align-items: stretch;
-    max-width: 100%;
+    width: 100%;
     height: 100%;
   }
 
@@ -245,28 +245,6 @@
         height: 55%;
         fill: var(--color-surface-base) !important;
       }
-    }
-  }
-
-  .courses-nav-sep {
-    display: inline-block;
-    width: 1px;
-    height: 20px;
-    margin: var(--spacing-0) var(--spacing-4);
-    background: var(--color-border-default);
-    align-self: center;
-    flex-shrink: 0;
-  }
-
-  .courses-nav-brand {
-    color: var(--ink);
-    font-size: var(--font-size-base);
-    font-weight: var(--font-weight-bold);
-    text-decoration: none;
-    white-space: nowrap;
-
-    &:hover {
-      color: var(--blurple);
     }
   }
 
@@ -319,6 +297,20 @@
       .info-circle-wrapper {
         border-left: none;
         padding: var(--spacing-0) var(--spacing-5);
+
+        .info-circle {
+          display: inline-flex;
+          justify-content: center;
+          align-items: center;
+          width: 32px;
+          height: 32px;
+          border-radius: var(--radius-circle);
+          background: var(--blurple);
+          color: var(--color-surface-base);
+          font-size: var(--font-size-base);
+          font-weight: var(--font-weight-bold);
+          line-height: var(--line-height-none);
+        }
       }
     }
   }

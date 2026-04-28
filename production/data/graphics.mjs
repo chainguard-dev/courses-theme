@@ -126,6 +126,9 @@ const SVG_ATTRS = `xmlns="http://www.w3.org/2000/svg" fill="#6226FB" class="head
 /** Full logo: Linky + "Chainguard" + "Courses" */
 export const logo = `<svg ${SVG_ATTRS} viewBox="38 45 402 41">${LINKY_PATH}${CHAINGUARD_PATH}${COURSES_PATH}</svg>`;
 
+/** Brand bar logo: Linky mascot only (compact, for the narrow top bar) */
+export const logoLinky = `<svg ${SVG_ATTRS} viewBox="38 45 43 41">${LINKY_PATH}</svg>`;
+
 /** Brand bar logo: Linky mascot + "Chainguard" wordmark only */
 export const logoLinkyAndChainguard = `<svg ${SVG_ATTRS} viewBox="38 45 252 41">${LINKY_PATH}${CHAINGUARD_PATH}</svg>`;
 

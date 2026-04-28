@@ -27,12 +27,6 @@ export function setupCoursesNav() {
             innerHTML: logoCourses,
           }),
         ]),
-        el("span", { className: "courses-nav-sep", aria: { hidden: "true" } }),
-        el("a", {
-          className: "courses-nav-brand",
-          href: sanitizeUrl(CG.state.baseURL),
-          text: "Courses",
-        }),
         el("nav", { id: "courses-nav-links", aria: { label: "Site navigation" } }),
       ]),
       el("div", { id: "courses-nav-right" }, [
