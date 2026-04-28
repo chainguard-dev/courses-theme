@@ -9,7 +9,7 @@
   left: 0;
   z-index: 5;
   width: 100%;
-  height: 60px;
+  height: 45px;
   overflow: visible;
   background-color: var(--white) !important;
   border-bottom: 1px solid var(--color-border-default) !important;
@@ -31,15 +31,7 @@
   }
 
   + #mobile-header {
-    top: 60px;
-  }
-
-  @media screen and (max-width: 690px) {
-    height: 45px !important;
-
-    + #mobile-header {
-      top: 45px;
-    }
+    top: 45px;
   }
 }
 
@@ -93,7 +85,7 @@
 
         svg {
           fill: var(--color-surface-base) !important;
-          height: 40%;
+          height: 55%;
         }
       }
     }
@@ -126,7 +118,7 @@
         width: 32px;
         height: 32px;
         border-radius: var(--radius-circle);
-        background: var(--blurple);
+        background: var(--solar);
         color: var(--color-surface-base);
         font-size: var(--font-size-base);
         font-weight: var(--font-weight-bold);
@@ -205,7 +197,7 @@
 
 #courses-nav {
   position: fixed;
-  top: 60px;
+  top: 45px;
   left: 0;
   z-index: 4; /* below #header (z-index: 5) */
   display: none; /* shown via media query below */
@@ -233,17 +225,16 @@
     display: flex;
     align-items: stretch;
     height: 100%;
-    background-color: var(--blurple);
 
     a {
       display: flex;
       align-items: center;
       height: 100%;
-      padding: var(--spacing-0) var(--spacing-4);
+      padding: var(--spacing-0) var(--spacing-5);
 
       svg {
         height: 55%;
-        fill: var(--color-surface-base) !important;
+        fill: var(--blurple) !important;
       }
     }
   }
@@ -305,7 +296,7 @@
           width: 32px;
           height: 32px;
           border-radius: var(--radius-circle);
-          background: var(--blurple);
+          background: var(--solar);
           color: var(--color-surface-base);
           font-size: var(--font-size-base);
           font-weight: var(--font-weight-bold);
