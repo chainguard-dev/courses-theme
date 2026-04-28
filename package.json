@@ -12,7 +12,7 @@
     "watch:css": "postcss production/style.css -o dist/bundle.css --watch --map",
     "watch:js": "esbuild production/theme.mjs --bundle --sourcemap --outfile=dist/bundle.js --watch",
     "generate:langs": "node generate_language_file.js",
-    "build": "npm run lint && npm run build:css && npm run build:js",
+    "build": "node build-prod.mjs",
     "build:dev": "node build-dev.mjs",
     "dev": "npm run watch:css & npm run watch:js",
     "test": "node --test"
