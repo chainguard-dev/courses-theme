@@ -1,7 +1,7 @@
 import { Q, el, sanitizeUrl } from "./utils.mjs";
 import { CG } from "./CG.mjs";
 
-import { logo } from "../data/graphics.mjs";
+import { logoCourses } from "../data/graphics.mjs";
 
 /**
  * Builds and inserts the secondary "Courses" navigation bar that sits below
@@ -24,7 +24,7 @@ export function setupCoursesNav() {
             className: "header-logo-link focus-link-v2",
             href: sanitizeUrl(CG.state.baseURL),
             aria: { label: "Chainguard Courses home" },
-            innerHTML: logo,
+            innerHTML: logoCourses,
           }),
         ]),
         el("span", { className: "courses-nav-sep", aria: { hidden: "true" } }),
