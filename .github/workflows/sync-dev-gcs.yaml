@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - dev
+      - dev-*
     paths:
       - 'production/**'
   workflow_dispatch:
