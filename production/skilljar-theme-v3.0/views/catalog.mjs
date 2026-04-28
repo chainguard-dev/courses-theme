@@ -4,9 +4,11 @@ import { createClone } from "../icons.mjs";
 import { CG } from "../CG.mjs";
 import { logger } from "../logger.mjs";
 import { makeSections } from "../sections.mjs";
+import { makeLandingPage } from "../landing-page.mjs";
 
 // static imports
 import { pathSections } from "../../data/path-sections.mjs";
+import { landingSections } from "../../data/landing-sections.mjs";
 import { bannerSVGs } from "../../data/graphics.mjs";
 import { header } from "../../data/landing-header.mjs";
 import { cta } from "../../data/landing-cta.mjs";
@@ -68,8 +70,13 @@ export function catalogView() {
   // remove search functionality
   remove([".catalog-left-nav", "#left-nav-button", ".back-to-catalog"]);
 
-  // create new sections
-  makeSections(CG.data.sections, "#skilljar-content", CG.state.baseURL);
+  // create new sections — landing page gets the richer component layout,
+  // all other catalog pages (partners, etc.) get the standard course grid
+  if (CG.page.isLanding) {
+    makeLandingPage(landingSections, "#skilljar-content", CG.state.baseURL);
+  } else {
+    makeSections(CG.data.sections, "#skilljar-content", CG.state.baseURL);
+  }
 
   CG.dom.contentContainer.append(
     el("div", { className: "full-width", id: "cta-bottom" }, [

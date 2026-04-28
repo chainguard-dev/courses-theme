@@ -20,6 +20,7 @@
 @import url("css/404.css");                /* Error pages (body.sj-page-404) */
 @import url("css/auth.css");               /* Login/signup (body.sj-page-login, body.sj-page-signup) */
 @import url("css/catalog.css");            /* Catalog/landing (body.sj-page-catalog) */
+@import url("css/landing-page.css");       /* Landing page components (body.sj-page-catalog-root) */
 @import url("css/completion.css");         /* Completion pages (body.sj-page-completion) */
 @import url("css/course-info.css");        /* Course detail (body.sj-page-detail-course, body.sj-page-curriculum) */
 @import url("css/courses-learning-paths.css"); /* Shared course/path styles */
