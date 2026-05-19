@@ -6,7 +6,6 @@ on:
       - main
     paths:
       - 'fonts/**'
-      - 'cors.json'
   workflow_dispatch:
 
 permissions: {}
