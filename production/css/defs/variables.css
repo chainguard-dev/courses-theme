@@ -213,9 +213,6 @@
     box-shadow 0.2s ease-in-out,
     transform 0.2s ease;
 
-  /* Layout - Fixed-position dimensions */
-  --header-height: 60px;            /* Site header (overridden to 45px below 690px) */
-
   /* Responsive Breakpoints - Standard viewport widths */
   /* Note: CSS variables cannot be used in media queries directly.
      These are for documentation and reference. Use the pixel values
@@ -232,11 +229,4 @@
      @media (min-width: 1200px) { Desktop styles }
      @media (min-width: 1536px) { Large desktop styles }
   */
-}
-
-/* Header collapses to 45px below 690px - mirrors the breakpoint in header.css */
-@media screen and (max-width: 690px) {
-  :root {
-    --header-height: 45px;
-  }
 }

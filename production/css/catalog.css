@@ -248,7 +248,7 @@ body.sj-page-detail-path {
 
       @media (min-width: 1200px) {
         position: sticky;
-        top: calc(var(--header-height) + var(--spacing-6)); /* fixed header + breathing room */
+        top: calc(60px + var(--spacing-6)); /* 60px fixed header + breathing room */
         align-self: start;
       }
     }
