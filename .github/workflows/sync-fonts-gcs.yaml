@@ -44,6 +44,3 @@ jobs:
 
       - name: Sync fonts directory to GCS
         run: gsutil -m rsync -r -d fonts/ gs://chainguard-courses-theme/fonts/
-
-      - name: Apply CORS config to bucket
-        run: gcloud storage buckets update gs://chainguard-courses-theme --cors-file=cors.json
