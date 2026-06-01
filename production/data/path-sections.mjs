@@ -418,6 +418,65 @@ export const pathSections = {
     },
   ],
 
+  "getting-started-with-chainguard-libraries": [
+    {
+      eyebrow: "🧠 Core",
+      title: "Foundational Knowledge",
+      description:
+        "Start here to understand the why behind Chainguard Libraries. This course covers core concepts like software supply chain risk, how libraries work, ecosystem coverage, and how CVE mitigation fits into the model.",
+      links: [
+        {
+          isPath: false,
+          isCourse: true,
+          hasBadge: false,
+          title: "Building with Chainguard Libraries",
+          slug: "building-with-chainguard-libraries",
+          description:
+            "Learn how to consume open source libraries with built-in supply chain security using Chainguard Libraries.",
+          icon: "bookmark",
+        },
+      ],
+    },
+    {
+      eyebrow: "🔧 Hands-on",
+      title: "Practical Demos: Build, Switch, Verify",
+      description:
+        "See Chainguard Libraries in action. These walkthroughs show real applications built with upstream dependencies, then switched to Chainguard so you can follow the exact setup, authentication, and verification steps for each ecosystem.",
+      links: [
+        {
+          isPath: false,
+          isCourse: true,
+          hasBadge: false,
+          title: "Chainguard Libraries for JavaScript",
+          slug: "chainguard-libraries-for-javascript",
+          description:
+            "Build a JavaScript app using Chainguard Libraries with npm, Yarn, and Bun, and see our secure dependency sourcing in action.",
+          icon: "bookmark",
+        },
+        {
+          isPath: false,
+          isCourse: true,
+          hasBadge: false,
+          title: "Chainguard Libraries for Python",
+          slug: "chainguard-libraries-for-python",
+          description:
+            "Learn how to migrate a Python app to Chainguard Libraries, verify your dependencies, and improve supply chain security without breaking your workflow.",
+          icon: "bookmark",
+        },
+        {
+          isPath: false,
+          isCourse: true,
+          hasBadge: false,
+          title: "Chainguard Libraries for Java",
+          slug: "chainguard-libraries-for-java",
+          description:
+            "Learn how to migrate a Java application from Maven Central to Chainguard Libraries while verifying dependency coverage and provenance.",
+          icon: "bookmark",
+        },
+      ],
+    },
+  ],
+
   // Partner intro
   "chainguard-discovery-partner-sales-foundations": [
     {
