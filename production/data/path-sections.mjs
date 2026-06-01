@@ -71,7 +71,7 @@ export const pathSections = {
           isCourse: false,
           hasBadge: false,
           title: "Getting Started with Chainguard Libraries",
-          slug: "getting-started-with-chainguard-libraries",
+          slug: "path/getting-started-with-chainguard-libraries",
           description:
             "Learn how to securely consume open source dependencies using Chainguard Libraries across JavaScript, Java, and Python.",
           icon: "chainguard",
