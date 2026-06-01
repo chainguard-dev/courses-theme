@@ -17,17 +17,6 @@ export const pathSections = {
             "This course is designed to teach new Chainguard engineers how to build container images.",
           icon: "chainguard",
         },
-        {
-          adminOnly: true,
-          isPath: true,
-          isCourse: false,
-          hasBadge: true,
-          icon: "burger",
-          title: "Painless Vulnerability Management",
-          slug: "path/painless-vulnerability-management",
-          description:
-            "Learn how to manage vulnerabilities effectively using Chainguard's tools and best practices. Currently, this is an internal learning path as we haven't rolled it out publicly yet.",
-        },
       ],
       classNames: ["internal"],
     },
