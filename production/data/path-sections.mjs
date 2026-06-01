@@ -60,6 +60,26 @@ export const pathSections = {
       ],
     },
     {
+      internalSection: true,
+      eyebrow: "Chainguard Fundamentals",
+      title: "Get Started with Libraries",
+      description:
+        "Reduce software supply chain risk without changing how you build. Learn how to adopt Chainguard Libraries across JavaScript, Java, and Python.",
+      links: [
+        {
+          isPath: true,
+          isCourse: false,
+          hasBadge: false,
+          title: "Getting Started with Chainguard Libraries",
+          slug: "getting-started-with-chainguard-libraries",
+          description:
+            "Learn how to securely consume open source dependencies using Chainguard Libraries across JavaScript, Java, and Python.",
+          icon: "chainguard",
+        },
+      ],
+      classNames: ["internal"],
+    },
+    {
       eyebrow: "Tools & Customization",
       title: "Make Chainguard Your Own",
       description:
