@@ -60,7 +60,6 @@ export const pathSections = {
       ],
     },
     {
-      internalSection: true,
       eyebrow: "Chainguard Fundamentals",
       title: "Get Started with Libraries",
       description:
@@ -77,7 +76,6 @@ export const pathSections = {
           icon: "classBurger",
         },
       ],
-      classNames: ["internal"],
     },
     {
       eyebrow: "Tools & Customization",
